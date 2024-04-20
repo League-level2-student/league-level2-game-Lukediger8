@@ -1,12 +1,14 @@
+package game;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-public class bullet extends GameObject{
+public class Bullet extends GameObject{
 
-	public bullet(int a, int b, int c, int d) {
+	public Bullet(int a, int b, int c, int d) {
 		super(a, b, c, d);
 		// TODO Auto-generated constructor stub
 		if (needImage) {
