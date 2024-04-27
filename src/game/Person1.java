@@ -55,9 +55,7 @@ public class Person1 extends GameObject {
 		y += speed;
 	}
 
-	public Bullet getProjectile() {
-     return new Bullet(x+width/2, y, 10, 10);
-} 
+	
 
 	
 	public void draw(Graphics g) {
@@ -69,6 +67,11 @@ public class Person1 extends GameObject {
 			g.setColor(Color.BLUE);
 			g.fillRect(x, y, width, height);
 		}
+	}
+
+
+	public Bullet getBullet() {
+		return new Bullet(x+width/2, y, 10, 10);
 	}	
 
 }

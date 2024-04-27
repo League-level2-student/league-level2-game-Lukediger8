@@ -8,17 +8,18 @@ import java.util.Random;
 
 public class ObjectManager implements ActionListener {
 	Bullet bullet;
-	Player2 player2;
+	Person1 person2;
+	Person1 person1;
 	Random random = new Random();
 	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
 
-	public ObjectManager() {
-
+	public ObjectManager(Person1 person1,Person1 person2) {
+		 
 	}
 
-	public void addProjectile(Bullet projectileObject) {
-		bullets.add(projectileObject);
+	public void addBullet(Bullet bulletObject) {
+		bullets.add(bulletObject);
 
 	}
 
@@ -40,9 +41,12 @@ public class ObjectManager implements ActionListener {
 
 	public void checkCollision() {
 			for(Bullet bullet: bullets) {
-				if (bullet.collisionBox.intersects(Player2.collisionBox)) {
-					Player2.isActive = false;
-					Player2.isActive = false;
+				if (bullet.collisionBox.intersects(person1.collisionBox)) {
+					person1.isActive = false;
+				
+				}
+				if (bullet.collisionBox.intersects(person2.collisionBox)) {
+					person2.isActive = false;
 				}
 			}
 		
@@ -67,6 +71,6 @@ public class ObjectManager implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 
-	}
+	}	
 
 }

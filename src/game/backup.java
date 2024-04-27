@@ -1,4 +1,4 @@
-package game;
+//package game;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -39,12 +39,14 @@ public class Game {
 		final int MENU = 0;
 		final int GAME = 1;
 		final int END = 2;
-		ObjectManager objectManager;
 		Timer frameDraw;
+		Timer person1Spawn;
 		Font titleFont;
 		Font subTitle;
 		Font subTitle2;
 		int currentState = MENU;
+		ObjectManager objectManager;
+		Bullet bullet;
 
 		public GamePanel() {
 			titleFont = new Font("Arial", Font.PLAIN, 48);
@@ -52,17 +54,12 @@ public class Game {
 			subTitle2 = new Font("Arial", Font.PLAIN, 18);
 			frameDraw = new Timer(1000 / 60, this);
 			frameDraw.start();
-			person1 = new Person1(250, 700, 50, 50);
+			bullet = new Bullet(250, 700, 50, 50);
+			person1 = new Person1(500, 800, 50, 50);
 			person2 = new Person1(0, 0, 50, 50);
-			objectManager = new ObjectManager(person1, person2);
-
+			objectManager = new ObjectManager();
 			startGame();
-
-		}
-
-		void startGame() {
-			frameDraw = new Timer(1000 / 60, this);
-			frameDraw.start();
+			
 		}
 
 		void updateMenuState() {
@@ -79,7 +76,7 @@ public class Game {
 
 		void drawMenuState(Graphics g) {
 			g.setColor(Color.BLUE);
-			g.fillRect(0, 0, game.WIDTH, game.HEIGHT);
+			g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 			g.setFont(titleFont);
 			g.setColor(Color.YELLOW);
 			g.drawString("LEAGUE INVADERS", 30, 100);
@@ -107,10 +104,10 @@ public class Game {
 		void drawGameState(Graphics g) {
 
 			if (gotImage) {
-				g.drawImage(image, 0, 0, game.WIDTH, game.HEIGHT, null);
+				g.drawImage(image, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 			} else {
 				g.setColor(Color.BLUE);
-				g.fillRect(0, 0, game.WIDTH, game.HEIGHT);
+				g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 
 			}
 			person1.draw(g);
@@ -120,7 +117,7 @@ public class Game {
 
 		void drawEndState(Graphics g) {
 			g.setColor(Color.RED);
-			g.fillRect(0, 0, game.WIDTH, game.HEIGHT);
+			g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 			g.setFont(titleFont);
 			g.setColor(Color.YELLOW);
 			g.drawString("GAME OVER", 78, 100);
@@ -159,12 +156,22 @@ public class Game {
 			repaint();
 		}
 
+		
+		void startGame() {
+			frameDraw = new Timer(1000 / 60, this);
+			frameDraw.start();
+			person1Spawn = new Timer(1000, objectManager);
+			person1Spawn.start();
+		}
+
 		@Override
 		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
+			
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				//this part works
 				if (currentState == END) {
 					currentState = MENU;
+			
 				} else {
 					currentState++;
 				}
@@ -193,7 +200,6 @@ public class Game {
 			}
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 				objectManager.addBullet(person1.getBullet());
-
 			}
 
 		}
