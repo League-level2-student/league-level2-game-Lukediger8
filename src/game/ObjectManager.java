@@ -8,14 +8,15 @@ import java.util.Random;
 
 public class ObjectManager implements ActionListener {
 	Bullet bullet;
-	Person1 person2;
-	Person1 person1;
+	PlayerObject person2;
+	PlayerObject person1;
 	Random random = new Random();
 	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
 
-	public ObjectManager(Person1 person1,Person1 person2) {
-		 
+	public ObjectManager(PlayerObject person1,PlayerObject person2) {
+		 this.person1 = person1;
+		 this.person2 = person2;
 	}
 
 	public void addBullet(Bullet bulletObject) {
@@ -43,10 +44,13 @@ public class ObjectManager implements ActionListener {
 			for(Bullet bullet: bullets) {
 				if (bullet.collisionBox.intersects(person1.collisionBox)) {
 					person1.isActive = false;
-				
+					person1.doDamage(10);
+					System.out.println("");
 				}
 				if (bullet.collisionBox.intersects(person2.collisionBox)) {
 					person2.isActive = false;
+					person2.doDamage(10);
+					System.out.println("");
 				}
 			}
 		

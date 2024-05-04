@@ -34,8 +34,8 @@ public class Game {
 	public static final int HEIGHT = 800;
 
 	public class GamePanel extends JPanel implements ActionListener, KeyListener {
-		Person1 person1;
-		Person1 person2;
+		PlayerObject person1;
+		PlayerObject person2;
 		final int MENU = 0;
 		final int GAME = 1;
 		final int END = 2;
@@ -52,8 +52,8 @@ public class Game {
 			subTitle2 = new Font("Arial", Font.PLAIN, 18);
 			frameDraw = new Timer(1000 / 60, this);
 			frameDraw.start();
-			person1 = new Person1(250, 700, 50, 50);
-			person2 = new Person1(0, 0, 50, 50);
+			person1 = new PlayerObject(250, 700, 50, 50, 10);
+			person2 = new PlayerObject(0, 0, 50, 50, -10);
 			objectManager = new ObjectManager(person1, person2);
 
 			startGame();
@@ -191,11 +191,32 @@ public class Game {
 					person1.right();
 				}
 			}
-			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			if (e.getKeyCode() == KeyEvent.VK_K) {
 				objectManager.addBullet(person1.getBullet());
-
 			}
-
+			if (e.getKeyCode() == KeyEvent.VK_W) {
+				if (person2.y > 0) {
+					person2.up();
+				}
+			}
+			if (e.getKeyCode() == KeyEvent.VK_A) {
+				if (person2.y < 750) {
+					person2.left();
+				}
+			}
+			if (e.getKeyCode() == KeyEvent.VK_S) {
+				if (person2.y < 750) {
+					person2.down();
+				}
+			}
+			if (e.getKeyCode() == KeyEvent.VK_D) {
+				if (person2.y < 750) {
+					person2.right();
+				}
+			}
+			if (e.getKeyCode() == KeyEvent.VK_F) {
+				objectManager.addBullet(person2.getBullet());
+			}
 		}
 
 		@Override

@@ -7,21 +7,21 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class Bullet extends GameObject{
-
-	public Bullet(int a, int b, int c, int d) {
-		super(a, b, c, d);
-		// TODO Auto-generated constructor stub
-		if (needImage) {
-		    loadImage ("bullet.png");
-		}
-		speed = 10;
-
-	}
-
 	public int speed = 1;
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
+	
+	public Bullet(int x, int y, int width, int height, int speed) {
+		super(x, y, width, height);
+		// TODO Auto-generated constructor stub
+		if (needImage) {
+		    loadImage ("bullet.png");
+		}
+		this.speed = speed;
+
+	}
+
 	public void update() {
 		y -= speed;
 		  super.update();
