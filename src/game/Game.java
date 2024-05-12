@@ -81,13 +81,13 @@ public class Game {
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, game.WIDTH, game.HEIGHT);
 			g.setFont(titleFont);
-			g.setColor(Color.YELLOW);
-			g.drawString("LEAGUE INVADERS", 30, 100);
+			g.setColor(Color.BLACK);
+			g.drawString("Shooting Game", 30, 100);
 			g.setFont(subTitle);
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.BLACK);
 			g.drawString("Press ENTER to Start", 150, 350);
 			g.setFont(subTitle2);
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.BLACK);
 			g.drawString("Press SPACE for instructions", 122, 470);
 		}
 
@@ -109,26 +109,27 @@ public class Game {
 			if (gotImage) {
 				g.drawImage(image, 0, 0, game.WIDTH, game.HEIGHT, null);
 			} else {
-				g.setColor(Color.BLUE);
-				g.fillRect(0, 0, game.WIDTH, game.HEIGHT);
+				g.setColor(Color.GRAY);
+				g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 
 			}
 			person1.draw(g);
 			person2.draw(g);
 			objectManager.draw(g);
+		
 		}
 
 		void drawEndState(Graphics g) {
-			g.setColor(Color.RED);
+			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, game.WIDTH, game.HEIGHT);
 			g.setFont(titleFont);
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.BLACK);
 			g.drawString("GAME OVER", 78, 100);
 			g.setFont(subTitle);
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.BLACK);
 			g.drawString("You Killed Enemies", 150, 350);
 			g.setFont(subTitle2);
-			g.setColor(Color.YELLOW);
+			g.setColor(Color.BLACK);
 			g.drawString("Press ENTER to Restart", 122, 470);
 
 		}
