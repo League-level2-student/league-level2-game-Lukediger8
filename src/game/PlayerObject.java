@@ -28,6 +28,7 @@ public class PlayerObject extends GameObject {
 	public void doDamage(int damage) {
 		if(hp<=0) {
 			isActive = false;
+			
 		}
 		
 		hp -= damage;

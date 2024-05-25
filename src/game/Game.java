@@ -120,8 +120,12 @@ public class Game {
 			person2.draw(g);
 			objectManager.draw(g);
 			
-			
-			
+			if(person1.isActive == false) {
+				currentState = END;
+			}
+			if(person2.isActive == false) {
+				currentState = END;
+			}
 		
 		}
 
@@ -136,7 +140,6 @@ public class Game {
 			g.drawString("You Killed Enemies", 150, 350);
 			g.setFont(subTitle2);
 			g.setColor(Color.BLACK);
-			g.drawString("Press ENTER to Restart", 122, 470);
 
 		}
 
