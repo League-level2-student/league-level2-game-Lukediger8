@@ -25,8 +25,14 @@ public class PlayerObject extends GameObject {
 	}
 
 
-	void doDamage(int damage) {
+	public void doDamage(int damage) {
+		if(hp<=0) {
+			isActive = false;
+		}
+		
 		hp -= damage;
+		
+		
 	}
 			
 
@@ -77,7 +83,7 @@ public class PlayerObject extends GameObject {
 
 
 	public Bullet getBullet() {
-		return new Bullet(x+width/2, y, 10, 10, bulletSpeed);
+		return new Bullet(x+width/2, y+height/2 - bulletSpeed*3, 10, 10, bulletSpeed);
 	}	
 
 }

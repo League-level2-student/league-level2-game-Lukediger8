@@ -13,6 +13,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -45,7 +46,6 @@ public class Game {
 		Font subTitle;
 		Font subTitle2;
 		int currentState = MENU;
-
 		public GamePanel() {
 			titleFont = new Font("Arial", Font.PLAIN, 48);
 			subTitle = new Font("Arial", Font.PLAIN, 18);
@@ -55,7 +55,6 @@ public class Game {
 			person1 = new PlayerObject(250, 700, 50, 50, 10);
 			person2 = new PlayerObject(0, 0, 50, 50, -10);
 			objectManager = new ObjectManager(person1, person2);
-
 			startGame();
 
 		}
@@ -88,8 +87,12 @@ public class Game {
 			g.drawString("Press ENTER to Start", 150, 350);
 			g.setFont(subTitle2);
 			g.setColor(Color.BLACK);
-			g.drawString("Press SPACE for instructions", 122, 470);
+			g.drawString("This is a 2 player game, try to kill each other", 100, 470);
+			g.setColor(Color.BLACK);
+			g.drawString("Controls:WASD and arrow keys Shooting:F and K", 80, 450);
+			
 		}
+		
 
 		void loadImage(String imageFile) {
 			if (needImage) {
@@ -116,6 +119,9 @@ public class Game {
 			person1.draw(g);
 			person2.draw(g);
 			objectManager.draw(g);
+			
+			
+			
 		
 		}
 

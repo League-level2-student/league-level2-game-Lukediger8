@@ -13,10 +13,10 @@ public class ObjectManager implements ActionListener {
 	Random random = new Random();
 	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
-
-	public ObjectManager(PlayerObject person1,PlayerObject person2) {
-		 this.person1 = person1;
-		 this.person2 = person2;
+	public ObjectManager(PlayerObject person1, PlayerObject person2) {
+		this.person1 = person1;
+		this.person2 = person2;
+	
 	}
 
 	public void addBullet(Bullet bulletObject) {
@@ -24,36 +24,40 @@ public class ObjectManager implements ActionListener {
 
 	}
 
-
 	public void update() {
-	
-		for(Bullet bullet : bullets) {
+
+		for (Bullet bullet : bullets) {
 			bullet.update();
-			if(bullet.y < 0){
+			if (bullet.y < 0) {
 				bullet.isActive = false;
 			}
-			
+
 		}
 		checkCollision();
 		purgeObjects();
-			
+		if (person1.isActive == false) {
+			person1 = new PlayerObject(250, 700, 50, 50, 10);
+
 		}
-	
+		if (person2.isActive == false) {
+			person2 = new PlayerObject(0, 0, 50, 50, -10);
+		}
+	}
 
 	public void checkCollision() {
-			for(Bullet bullet: bullets) {
-				if (bullet.collisionBox.intersects(person1.collisionBox)) {
-					person1.isActive = false;
-					person1.doDamage(10);
-					System.out.println("");
-				}
-				if (bullet.collisionBox.intersects(person2.collisionBox)) {
-					person2.isActive = false;
-					person2.doDamage(10);
-					System.out.println("");
-				}
+		for (Bullet bullet : bullets) {
+			if (bullet.collisionBox.intersects(person1.collisionBox)) {
+				person1.doDamage(10);
+				bullet.isActive = false;
+				System.out.println("1");
 			}
-		
+			if (bullet.collisionBox.intersects(person2.collisionBox)) {
+				person2.doDamage(10);
+				bullet.isActive = false;
+				System.out.println("2");
+			}
+		}
+
 	}
 
 	public void draw(Graphics g) {
@@ -65,7 +69,7 @@ public class ObjectManager implements ActionListener {
 
 	public void purgeObjects() {
 		for (int i = 0; i < bullets.size(); i++) {
-			if (!bullets.get(i).isActive ) {
+			if (!bullets.get(i).isActive) {
 				bullets.remove(i);
 			}
 		}
@@ -75,6 +79,6 @@ public class ObjectManager implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 
-	}	
+	}
 
 }
