@@ -35,13 +35,6 @@ public class ObjectManager implements ActionListener {
 		}
 		checkCollision();
 		purgeObjects();
-		if (person1.isActive == false) {
-			person1 = new PlayerObject(250, 700, 50, 50, 10);
-
-		}
-		if (person2.isActive == false) {
-			person2 = new PlayerObject(0, 0, 50, 50, -10);
-		}
 	}
 
 	public void checkCollision() {
