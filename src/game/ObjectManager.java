@@ -33,9 +33,14 @@ public class ObjectManager implements ActionListener {
 			}
 
 		}
+		
+		
+		
 		checkCollision();
 		purgeObjects();
-	}
+		
+		}
+	
 
 	public void checkCollision() {
 		for (Bullet bullet : bullets) {

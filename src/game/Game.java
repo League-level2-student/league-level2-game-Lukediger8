@@ -46,6 +46,7 @@ public class Game {
 		Font subTitle;
 		Font subTitle2;
 		int currentState = MENU;
+		
 		public GamePanel() {
 			titleFont = new Font("Arial", Font.PLAIN, 48);
 			subTitle = new Font("Arial", Font.PLAIN, 18);
@@ -56,12 +57,18 @@ public class Game {
 			person2 = new PlayerObject(0, 0, 50, 50, -10);
 			objectManager = new ObjectManager(person1, person2);
 			startGame();
+			
+			
+			
 
 		}
 
 		void startGame() {
 			frameDraw = new Timer(1000 / 60, this);
 			frameDraw.start();
+
+
+			
 		}
 
 		void updateMenuState() {
@@ -70,12 +77,25 @@ public class Game {
 
 		void updateGameState() {
 			objectManager.update();
+			person1.update();
+			person2.update();
+			
 		}
 
 		void updateEndState() {
-
+			
 		}
 
+	void reset() {
+		startGame();
+		person1 = new PlayerObject(250, 700, 50, 50, 10);
+		person2 = new PlayerObject(0, 0, 50, 50, -10);
+		objectManager.person1 = person1;
+		objectManager.person2 = person2;
+
+		
+		}
+		
 		void drawMenuState(Graphics g) {
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, game.WIDTH, game.HEIGHT);
@@ -165,6 +185,7 @@ public class Game {
 				updateGameState();
 			} else if (currentState == END) {
 				updateEndState();
+				
 			}
 			repaint();
 		}
@@ -175,9 +196,11 @@ public class Game {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				if (currentState == END) {
 					currentState = MENU;
+					reset();
 				} else {
 					currentState++;
 				}
+				
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_UP) {

@@ -24,7 +24,10 @@ public class PlayerObject extends GameObject {
 		this.bulletSpeed = bulletSpeed;
 	}
 
-
+	public void update() {
+		super.update();
+	}
+	
 	public void doDamage(int damage) {
 		if(hp<=0) {
 			isActive = false;
@@ -80,6 +83,8 @@ public class PlayerObject extends GameObject {
 			g.setColor(Color.BLUE);
 			g.fillRect(x, y, width, height);
 		}
+		g.setColor(Color.RED);
+		g.drawRect(x, y, width, height);
 	}
 
 
