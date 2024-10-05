@@ -12,6 +12,8 @@ public class ObjectManager implements ActionListener {
 	PlayerObject person1;
 	Random random = new Random();
 	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	long lastShotTime = 0;
+    static final long SHOOT_COOLDOWN = 500;
 
 	public ObjectManager(PlayerObject person1, PlayerObject person2) {
 		this.person1 = person1;
@@ -19,11 +21,14 @@ public class ObjectManager implements ActionListener {
 	
 	}
 
-	public void addBullet(Bullet bulletObject) {
-		bullets.add(bulletObject);
-
-	}
-
+	  public void addBullet(Bullet bullet) {
+	        long currentTime = System.currentTimeMillis();
+	        if (currentTime - lastShotTime >= SHOOT_COOLDOWN) {
+	            bullets.add(bullet);
+	            lastShotTime = currentTime;
+	        }
+	    }
+	
 	public void update() {
 
 		for (Bullet bullet : bullets) {
@@ -45,12 +50,12 @@ public class ObjectManager implements ActionListener {
 	public void checkCollision() {
 		for (Bullet bullet : bullets) {
 			if (bullet.collisionBox.intersects(person1.collisionBox)) {
-				person1.doDamage(10);
+				person1.takeDamage(10);
 				bullet.isActive = false;
 				System.out.println("1");
 			}
 			if (bullet.collisionBox.intersects(person2.collisionBox)) {
-				person2.doDamage(10);
+				person2.takeDamage(10);
 				bullet.isActive = false;
 				System.out.println("2");
 			}

@@ -19,6 +19,8 @@ import javax.swing.Timer;
 
 public class Game {
 	public static void main(String[] args) {
+		 int player1Score = 0;
+		 int player2Score = 0;
 
 		Game object = new Game();
 
@@ -30,6 +32,8 @@ public class Game {
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
 	JFrame frame;
+	
+	
 
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 800;
@@ -48,20 +52,21 @@ public class Game {
 		int currentState = MENU;
 		
 		public GamePanel() {
-			titleFont = new Font("Arial", Font.PLAIN, 48);
-			subTitle = new Font("Arial", Font.PLAIN, 18);
-			subTitle2 = new Font("Arial", Font.PLAIN, 18);
-			frameDraw = new Timer(1000 / 60, this);
-			frameDraw.start();
-			person1 = new PlayerObject(250, 700, 50, 50, 10);
-			person2 = new PlayerObject(0, 0, 50, 50, -10);
-			objectManager = new ObjectManager(person1, person2);
-			startGame();
-			
-			
-			
+			    titleFont = new Font("Arial", Font.PLAIN, 48);
+			    subTitle = new Font("Arial", Font.PLAIN, 18);
+			    subTitle2 = new Font("Arial", Font.PLAIN, 18);
+			    frameDraw = new Timer(1000 / 60, this);
+			    frameDraw.start();
 
-		}
+			    // Create player objects with image file names
+			    person1 = new PlayerObject(250, 700, 50, 50, 10, "human1.png"); // Player 1
+			    person2 = new PlayerObject(0, 0, 50, 50, -10, "human2.png"); // Player 2
+			    
+			    objectManager = new ObjectManager(person1, person2);
+			    startGame();
+			}
+		
+		
 
 		void startGame() {
 			frameDraw = new Timer(1000 / 60, this);
@@ -88,8 +93,8 @@ public class Game {
 
 	void reset() {
 		startGame();
-		person1 = new PlayerObject(250, 700, 50, 50, 10);
-		person2 = new PlayerObject(0, 0, 50, 50, -10);
+		 person1 = new PlayerObject(250, 700, 50, 50, 10, "human1.png");
+		    person2 = new PlayerObject(0, 0, 50, 50, -10, "human2.png");
 		objectManager.person1 = person1;
 		objectManager.person2 = person2;
 
@@ -145,7 +150,9 @@ public class Game {
 			}
 			if(person2.isActive == false) {
 				currentState = END;
+			
 			}
+			
 		
 		}
 
@@ -160,7 +167,7 @@ public class Game {
 			g.drawString("You Killed Enemies", 150, 350);
 			g.setFont(subTitle2);
 			g.setColor(Color.BLACK);
-
+			
 		}
 
 		@Override
@@ -173,9 +180,7 @@ public class Game {
 			} else if (currentState == END) {
 				drawEndState(g);
 			}
-
 		}
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -226,6 +231,7 @@ public class Game {
 			}
 			if (e.getKeyCode() == KeyEvent.VK_K) {
 				objectManager.addBullet(person1.getBullet());
+				
 			}
 			if (e.getKeyCode() == KeyEvent.VK_W) {
 				if (person2.y > 0) {
