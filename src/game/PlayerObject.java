@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
@@ -11,11 +12,13 @@ public class PlayerObject extends GameObject {
     int maxHealth = 100; // Maximum health
     int currentHealth = maxHealth; // Current health
     int bulletSpeed;
+    private String name; // Field for the player's name
 
-    public PlayerObject(int x, int y, int width, int height, int bulletSpeed, String imageFile) {
+    public PlayerObject(int x, int y, int width, int height, int bulletSpeed, String imageFile, String playerName) {
         super(x, y, width, height);
         this.bulletSpeed = bulletSpeed;
         this.currentHealth = maxHealth;
+        this.name = playerName; // Initialize the player's name
         loadImage(imageFile); // Load the specific image for this player
     }
 
@@ -63,12 +66,17 @@ public class PlayerObject extends GameObject {
             g.fillRect(x, y, width, height);
         }
 
+        // Draw the player's name above the character
+        g.setColor(Color.BLACK); // Set color for the name
+        g.setFont(new Font("Arial", Font.PLAIN, 16)); // Set font and size
+        g.drawString(name,x,y-10); 
+
         g.setColor(Color.RED);
         g.drawRect(x, y, width, height);
         int hpBarWidth = width; // Full width of the HP bar
         int hpBarHeight = 5; // Height of the HP bar
-        int hpBarX = x; // X position (aligned with the player's circle)
-        int hpBarY = y - hpBarHeight - 2; // Y position (above the circle)
+        int hpBarX = x; // X position (aligned with the player's character)
+        int hpBarY = y - hpBarHeight - 2; // Y position (above the character)
 
         // Draw background for HP bar
         g.setColor(Color.RED); // Color for the HP bar background
