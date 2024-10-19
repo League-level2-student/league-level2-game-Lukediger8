@@ -8,11 +8,13 @@ import javax.imageio.ImageIO;
 
 public class PlayerObject extends GameObject {
     private BufferedImage image; // Instance variable for the player's image
-    public int speed = 10;
+    public int speed = 5;
     int maxHealth = 100; // Maximum health
     int currentHealth = maxHealth; // Current health
     int bulletSpeed;
     private String name; // Field for the player's name
+    //private int movementTimer = 0; // Timer to control movement speed
+    //private final int MOVEMENT_DELAY = 1; // Delay in ticks before moving
 
     public PlayerObject(int x, int y, int width, int height, int bulletSpeed, String imageFile, String playerName) {
         super(x, y, width, height);
@@ -22,10 +24,58 @@ public class PlayerObject extends GameObject {
         loadImage(imageFile); // Load the specific image for this player
     }
 
-    public void update() {
-        super.update();
-    }
+    public void update(boolean left, boolean right, boolean up, boolean down) {
+    	//movementTimer++;  
+    	//if (movementTimer >= MOVEMENT_DELAY) {
+    	if (left) {
+            x -= speed;
+        }
+        if (right) {
+            x += speed;
+        }
+        if (up) {
+            y -= speed;
+        }
+        if (down) {
+            y += speed;
+        }
+        //movementTimer = 0;
+    	//}
+        // Prevent moving out of bounds
+        if (x < 0) x = 0;
+        if (x > Game.WIDTH - width) x = Game.WIDTH - width;
+        if (y < 0) y = 0;
+        if (y > Game.HEIGHT - height) y = Game.HEIGHT - height;
 
+        super.update();
+    	}
+    
+    public void update1(boolean a, boolean d, boolean w, boolean s) {
+    	//movementTimer++;  
+    	//if (movementTimer >= MOVEMENT_DELAY) {
+    	if (a) {
+             x -= speed;
+         }
+         if (d) {
+             x += speed;
+         }
+         if (w) {
+             y -= speed;
+         }
+         if (s) {
+             y += speed;
+         }
+        // movementTimer = 0;
+    	//}
+         // Prevent moving out of bounds
+         if (x < 0) x = 0;
+         if (x > Game.WIDTH - width) x = Game.WIDTH - width;
+         if (y < 0) y = 0;
+         if (y > Game.HEIGHT - height) y = Game.HEIGHT - height;
+
+         super.update();
+    }
+    
     public void takeDamage(int amount) {
         currentHealth -= amount;
         if (currentHealth < 0) {
@@ -55,6 +105,22 @@ public class PlayerObject extends GameObject {
     }
 
     public void down() {
+        y += speed;
+    }
+    
+    public void a() {
+        x += speed;
+    }
+
+    public void d() {
+        x -= speed;
+    }
+
+    public void w() {
+        y -= speed;
+    }
+
+    public void s() {
         y += speed;
     }
 

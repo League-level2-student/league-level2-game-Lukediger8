@@ -34,7 +34,14 @@ public class Game {
         Font titleFont;
         Font subTitle;
         Font subTitle2;
-
+        public boolean up;
+        public boolean down;
+        public boolean right;
+        public boolean left;
+        public boolean w;
+        public boolean a;
+        public boolean s;
+        public boolean d;
         int score1 = 0; // Player 1's score
         int score2 = 0; // Player 2's score
         int gameCount = 0; // Number of games played
@@ -78,9 +85,9 @@ public class Game {
         }
 
         void updateGameState() {
-            objectManager.update();
-            if (person1.isActive) person1.update();
-            if (person2.isActive) person2.update();
+        	 objectManager.update();
+        	    person1.update(left, right, up, down); // Update player 1's position
+        	    person2.update1(a, d, w, s); // Update player 2's position
             
             // Check for win conditions
             if (!person1.isActive && person2.isActive) {
@@ -176,25 +183,35 @@ public class Game {
                     currentState++;
                 }
             }
-
-            if (currentState == GAME) {
-                if (e.getKeyCode() == KeyEvent.VK_UP) person1.up();
-                if (e.getKeyCode() == KeyEvent.VK_DOWN) person1.down();
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) person1.left();
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) person1.right();
-                if (e.getKeyCode() == KeyEvent.VK_K) objectManager.addBullet(person1.getBullet());
-
-                if (e.getKeyCode() == KeyEvent.VK_W) person2.up();
-                if (e.getKeyCode() == KeyEvent.VK_A) person2.left();
-                if (e.getKeyCode() == KeyEvent.VK_S) person2.down();
-                if (e.getKeyCode() == KeyEvent.VK_D) person2.right();
-                if (e.getKeyCode() == KeyEvent.VK_F) objectManager.addBullet(person2.getBullet());
-            }
+            if (e.getKeyCode() == KeyEvent.VK_A) a = true;   // A for left
+            if (e.getKeyCode() == KeyEvent.VK_D) d = true;  // D for right
+            if (e.getKeyCode() == KeyEvent.VK_W) w = true;     // W for up
+            if (e.getKeyCode() == KeyEvent.VK_S) s = true;   // S for down
+            if (e.getKeyCode() == KeyEvent.VK_F) objectManager.addBullet(person2.getBullet());
+            // Arrow Key Controls
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) left = true;
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) right = true;
+            if (e.getKeyCode() == KeyEvent.VK_UP) up = true;
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) down = true;
+            if (e.getKeyCode() == KeyEvent.VK_K) objectManager.addBullet(person1.getBullet());
         }
+    
+        
 
         @Override
-        public void keyReleased(KeyEvent e) {}
+        public void keyReleased(KeyEvent e) {
+        	   if (e.getKeyCode() == KeyEvent.VK_A) a = false;   // A for left
+               if (e.getKeyCode() == KeyEvent.VK_D) d = false;  // D for right
+               if (e.getKeyCode() == KeyEvent.VK_W) w = false;     // W for up
+               if (e.getKeyCode() == KeyEvent.VK_S) s = false;   // S for down
 
+
+        // Arrow Key Controls
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) left = false;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) right = false;
+        if (e.getKeyCode() == KeyEvent.VK_UP) up = false;
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) down = false;
+        }
         @Override
         public void keyTyped(KeyEvent e) {}
     }
