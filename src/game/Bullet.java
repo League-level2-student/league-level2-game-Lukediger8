@@ -16,7 +16,8 @@ public class Bullet extends GameObject{
 		super(x, y, width, height);
 		// TODO Auto-generated constructor stub
 		if (needImage) {
-		    loadImage ("bullet.png");
+		    loadImage ("bullet1.png");
+		   
 		}
 		this.speed = speed;
 
@@ -28,8 +29,7 @@ public class Bullet extends GameObject{
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(Color.RED);
-		g.fillRect(x, y, width, height);
+
 		if (gotImage) {
 			g.drawImage(image, x, y, width, height, null);
 		} else {

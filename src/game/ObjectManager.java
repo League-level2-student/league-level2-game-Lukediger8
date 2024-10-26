@@ -13,7 +13,6 @@ public class ObjectManager implements ActionListener {
     ArrayList<Bullet> bullets = new ArrayList<>();
     ArrayList<Barrier> barriers = new ArrayList<>(); // List to store barriers
     long lastShotTime = 0;
-    static final long SHOOT_COOLDOWN = 500;
 
     public ObjectManager(PlayerObject person1, PlayerObject person2) {
         this.person1 = person1;
@@ -35,12 +34,10 @@ public class ObjectManager implements ActionListener {
 
     public void addBullet(Bullet bullet) {
         long currentTime = System.currentTimeMillis();
-        if (currentTime - lastShotTime >= SHOOT_COOLDOWN) {
             bullets.add(bullet);
             lastShotTime = currentTime;
         }
-    }
-
+    
     public void update() {
         for (Bullet bullet : bullets) {
             bullet.update();
