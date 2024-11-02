@@ -158,8 +158,8 @@ public class Game {
 
 			// Only display scores if 5 games have been played
 			if (gameCount >= 1) {
-				g.drawString("Player 1 Score: " + score1, 150, 250);
-				g.drawString("Player 2 Score: " + score2, 150, 300);
+				g.drawString( 	player1Name + ": " + score1, 150, 250);
+				g.drawString( 	player2Name + ": " + score2, 150, 300);
 			}
 			disableShooting();
 		}
